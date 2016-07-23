@@ -1,1 +1,4 @@
-Rpi.GPIO==0.6.2
+Rpi.GPIO
+ConfigParser
+Flask==0.11
+Flask-security
