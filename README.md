@@ -24,4 +24,7 @@ type in terminal
 
 Python3 /path/to/REST.py
 
+third type in browser
+localhost/api/v1/ping/
+
 
