@@ -1,4 +1,7 @@
+#This is dependecy management for Python
+
 Rpi.GPIO
 ConfigParser
-Flask==0.11
+Flask
 Flask-security
+mysql-connector
