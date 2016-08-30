@@ -1,26 +1,27 @@
-# Import the necessary libraries
 import RPi.GPIO as GPIO
-import time
+import time, sys
+
+FLOW_SENSOR = 23
 
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(FLOW_SENSOR, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
-# Setup pin 18 as an output
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.OUT)
+global count
+count = 0
 
+def countPulse(channel):
+   global count
+   count = count+1
+   print
+   count
 
-# This function turns the valve on and off in 10 sec. intervals.
-def valve_OnOff(Pin):
-    while True:
-        GPIO.output(18, GPIO.HIGH)
-        print("GPIO HIGH (on), valve should be off")
-        time.sleep(10)  # waiting time in seconds
-        GPIO.output(18, GPIO.LOW)
-        print("GPIO LOW (off), valve should be on")
-        time.sleep(10)
+GPIO.add_event_detect(FLOW_SENSOR, GPIO.FALLING, callback=countPulse)
 
-        valve_OnOff(18)
-
+while True:
+    try:
+        time.sleep(1)
+    except KeyboardInterrupt:
+        print
+        '\ncaught keyboard interrupt!, bye'
         GPIO.cleanup()
-
-        # to start type "python3 main.py"
+        sys.exit()
